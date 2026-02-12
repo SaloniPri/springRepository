@@ -9,7 +9,7 @@ import javax.swing.*;
 @Getter
 @Setter
 @Entity
-@Table(name="employee")
+@Table(name="employeeDetails")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

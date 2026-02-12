@@ -2,6 +2,7 @@ package com.employee.Controller;
 
 import com.employee.Entity.Employee;
 import com.employee.Service.EmpService;
+import com.employee.dto.Login;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,4 +25,10 @@ public class EmpController {
         Employee employee1=empService.createUser1(employee);
         return new ResponseEntity<>(employee1, HttpStatus.CREATED);
     }
+    @PostMapping("/login")
+    public String loginAttempt1(@RequestBody Login login){
+        String employee2=empService.loginAttempt(login);
+        return  employee2;
+    }
+
 }
