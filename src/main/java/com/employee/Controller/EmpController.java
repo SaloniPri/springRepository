@@ -2,6 +2,7 @@ package com.employee.Controller;
 
 import com.employee.Entity.Employee;
 import com.employee.Service.EmpService;
+import com.employee.dto.JWTtoken;
 import com.employee.dto.Login;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,24 @@ public class EmpController {
         return new ResponseEntity<>(employee1, HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public String loginAttempt1(@RequestBody Login login){
-        String employee2=empService.loginAttempt(login);
-        return  employee2;
+    public ResponseEntity<?> loginAttempt1(@RequestBody Login login){
+//        String employee2=empService.loginAttempt(login);
+//        return  employee2;
+          String token=empService.loginAttempt(login);
+        JWTtoken jwTtoken=new JWTtoken();
+        if(token != null) {
+            jwTtoken.setTokentype("JWT");
+            jwTtoken.setToken(token);
+            return new ResponseEntity<>(jwTtoken, HttpStatus.OK);
+        }
+        else{
+            return  new ResponseEntity<>("Invalid Credentials",HttpStatus.UNAUTHORIZED);
+        }
+
+
+        }
+
     }
 
-}
+
+

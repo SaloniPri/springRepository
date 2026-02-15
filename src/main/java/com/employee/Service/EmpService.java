@@ -13,6 +13,9 @@ import java.util.Optional;
 public class EmpService {
     @Autowired
     private EmpRepository empRepository;
+    @Autowired
+    private JWTService jWTService;
+
     public Employee createUser1(Employee employee){
         return empRepository.save(employee);
     }
@@ -21,7 +24,7 @@ public class EmpService {
         if(optionalEmployee.isPresent()){
             Employee employee=optionalEmployee.get();
             if(employee.getPassword().equals(login.getPassword()))
-                return "login success";
+                return jWTService.generateToken(employee);
 
         }
         return "invalid credentials";
